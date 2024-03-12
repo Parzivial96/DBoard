@@ -80,10 +80,12 @@ export default function Home() {
             <div className="loading-spinner"></div>
           ) : (
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-              <img
+              <Image
                 src={imageList[currentImageIndex].imageData}
                 alt={`Image ${imageList[currentImageIndex].id.replace("'", "&apos;")}`}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                width={100}
+                height={100}
               />
             </div>
           )}
