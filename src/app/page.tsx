@@ -92,6 +92,12 @@ export default function Home() {
           <h2>Today's Plan</h2>
         </div>
       </div>
+      <div className="marquee-container">
+        <div className="marquee-content">
+          <span>Your Marquee Content Goes Here. </span>
+          {/* Repeat the content as needed */}
+        </div>
+      </div>
     </div>
   );
 }

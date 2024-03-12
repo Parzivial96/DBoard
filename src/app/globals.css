@@ -18,8 +18,9 @@ body{
 
 .mainContainer{
   display: flex;
-  height: 80vh;
+  height: 75vh;
   justify-content: space-around;
+  margin-bottom: 5px;
 }
 
 .noticeContainer{
@@ -40,6 +41,7 @@ body{
   width: 100%;
   overflow: hidden;
   margin-bottom: 8px;
+  font-size: large;
 }
 
 .marquee-content {
