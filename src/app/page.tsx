@@ -1,6 +1,6 @@
 "use client"
 
-//import Image from "next/image";
+import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 
 interface Notice {
@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <div>
       <div className="header">
-        <img src="logosmvec.png" alt="SMVEC Logo" />
+        <Image src="/logosmvec.png" alt="SMVEC Logo" width={400} height={90}/>
         <h1>Notice Board</h1>
         <h4>{currentTime}</h4>
       </div>
