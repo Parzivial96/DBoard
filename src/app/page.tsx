@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image";
+//import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 
 interface Notice {
@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("https://dboard-api.onrender.com/api/getAllNotice");
+        const response = await fetch('https://dboard-api.onrender.com/api/getAllNotice');
         if (response.ok) {
           const data: Notice[] = await response.json();
           setImageList(data);
@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <div>
       <div className="header">
-        <Image src="/logosmvec.png" alt="SMVEC Logo" width={400} height={90}/>
+        <img src="logosmvec.png" alt="SMVEC Logo" width={400} height={80}/>
         <h1>Notice Board</h1>
         <h4>{currentTime}</h4>
       </div>
@@ -80,18 +80,16 @@ export default function Home() {
             <div className="loading-spinner"></div>
           ) : (
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-              <Image
+              <img
                 src={imageList[currentImageIndex].imageData}
-                alt={`Image ${imageList[currentImageIndex].id.replace("'", "&apos;")}`}
+                alt={`Image ${imageList[currentImageIndex].id}`}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                width={100}
-                height={100}
               />
             </div>
           )}
         </div>
         <div className='textContainer'>
-          <h2>Today's Plan</h2>
+          <h2>Today Plan</h2>
         </div>
       </div>
       <div className="marquee-container">
