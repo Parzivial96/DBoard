@@ -82,7 +82,7 @@ export default function Home() {
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               <img
                 src={imageList[currentImageIndex].imageData}
-                alt={`Image ${imageList[currentImageIndex].id}`}
+                alt={`Image ${imageList[currentImageIndex].id.replace("'", "&apos;")}`}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />
             </div>
