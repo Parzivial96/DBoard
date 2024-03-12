@@ -9,8 +9,22 @@ interface Notice {
   expiryDate: string;
 }
 
+interface Todo {
+  id: string;
+  textData: string;
+  expiryDate: string;
+}
+
+interface Marquee {
+  id: string;
+  marqueeData: string;
+  expiryDate: string;
+}
+
 export default function Home() {
   const [imageList, setImageList] = useState<Notice[]>([]);
+  const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [marqueeList, setMarqueeList] = useState<Marquee[]>([]);
   const [currentTime, setCurrentTime] = useState<string>('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -22,13 +36,40 @@ export default function Home() {
         if (response.ok) {
           const data: Notice[] = await response.json();
           setImageList(data);
+          setLoading(false);
         } else {
           console.error('Failed to fetch image list');
         }
       } catch (error) {
         console.error('Error fetching image list:', error);
-      } finally {
-        setLoading(false); // Set loading to false once images are fetched
+      }
+    };
+
+    const fetchTodos = async () => {
+      try {
+        const response = await fetch('https://dboard-api.onrender.com/api/getAllTodo');
+        if (response.ok) {
+          const data: Todo[] = await response.json();
+          setTodoList(data);
+        } else {
+          console.error('Failed to fetch todo list');
+        }
+      } catch (error) {
+        console.error('Error fetching todo list:', error);
+      }
+    };
+
+    const fetchMarquee = async () => {
+      try {
+        const response = await fetch('https://dboard-api.onrender.com/api/getAllMarquee');
+        if (response.ok) {
+          const data: Marquee[] = await response.json();
+          setMarqueeList(data);
+        } else {
+          console.error('Failed to fetch marquee list');
+        }
+      } catch (error) {
+        console.error('Error fetching marquee list:', error);
       }
     };
 
@@ -38,11 +79,14 @@ export default function Home() {
     };
 
     fetchImages();
+    fetchTodos();
+    fetchMarquee();
     updateCurrentTime();
 
     // Update time every second
     const intervalId = setInterval(updateCurrentTime, 1000);
 
+    // Clear the interval on component unmount to avoid memory leaks
     return () => clearInterval(intervalId);
   }, []);
 
@@ -65,13 +109,17 @@ export default function Home() {
     <div>
       <div className="header">
         <img src="logosmvec.png" alt="SMVEC Logo" width={400} height={80}/>
-        <h1>Notice Board</h1>
-        <h4>{currentTime}</h4>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <h2>Electrical and Electronics Engineering Department</h2>
+          <h3>Notice Board</h3>
+        </div>
+        <h3>{currentTime}</h3>
       </div>
       <div className="marquee-container">
         <div className="marquee-content">
-          <span>Your Marquee Content Goes Here. </span>
-          {/* Repeat the content as needed */}
+          {marqueeList.map((marquee) => (
+            <span key={marquee.id}>* {marquee.marqueeData} *</span>
+          ))}
         </div>
       </div>
       <div className='mainContainer'>
@@ -89,13 +137,13 @@ export default function Home() {
           )}
         </div>
         <div className='textContainer'>
-          <h2>Today Plan</h2>
-        </div>
-      </div>
-      <div className="marquee-container">
-        <div className="marquee-content">
-          <span>Your Marquee Content Goes Here. </span>
-          {/* Repeat the content as needed */}
+          <center><h2>Today Plan</h2></center>
+          <br/>
+          <ul>
+            {todoList.map((todo) => (
+              <li key={todo.id}>{todo.textData}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

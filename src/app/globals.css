@@ -1,11 +1,13 @@
-*{
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-body{
- background-color: black;
- color: white;
+body {
+  background-color: #f0f0f0; /* Set your desired background color */
+  color: #333; /* Set your desired text color */
+  font-family: Arial, sans-serif; /* Set your desired font */
 }
 
 .header{
@@ -18,23 +20,37 @@ body{
 
 .mainContainer{
   display: flex;
-  height: 75vh;
+  height: 80vh;
   justify-content: space-around;
   margin-bottom: 5px;
 }
 
 .noticeContainer{
   width: 65%;  
-  border: 1px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .textContainer{
-  border: 1px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #333;
+  color: #f0f0f0;
+  border-radius: 10px;
   padding: 5px;
   width: 30%;
+}
+
+.textContainer ul{
+  padding-left: 50px;
+  font-size: large;
+}
+
+.textContainer li{
+  margin-bottom: 10px;
 }
 
 .marquee-container {
@@ -47,6 +63,11 @@ body{
 .marquee-content {
   white-space: nowrap;
   animation: marquee 15s linear infinite; /* Adjust the duration as needed */
+  font-size: larger;
+}
+
+.marquee-content span{
+  margin-right: 30px;
 }
 
 @keyframes marquee {
