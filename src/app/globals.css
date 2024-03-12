@@ -1,24 +1,71 @@
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
+*{
+  margin: 0;
+  padding: 0;
 }
 
-.image-container {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+body{
+ background-color: black;
+ color: white;
 }
 
-.image-container img {
+.header{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.mainContainer{
+  display: flex;
+  height: 80vh;
+  justify-content: space-around;
+}
+
+.noticeContainer{
+  width: 65%;  
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContainer{
+  border: 1px solid white;
+  padding: 5px;
+  width: 30%;
+}
+
+.marquee-container {
   width: 100%;
-  height: auto;
+  overflow: hidden;
+  margin-bottom: 8px;
 }
 
-p {
-  text-align: center;
-  margin: 8px 0;
+.marquee-content {
+  white-space: nowrap;
+  animation: marquee 15s linear infinite; /* Adjust the duration as needed */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

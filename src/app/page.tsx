@@ -1,7 +1,7 @@
 "use client"
 
 //import Image from "next/image";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Notice {
   id: string;
@@ -11,6 +11,9 @@ interface Notice {
 
 export default function Home() {
   const [imageList, setImageList] = useState<Notice[]>([]);
+  const [currentTime, setCurrentTime] = useState<string>('');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -24,21 +27,70 @@ export default function Home() {
         }
       } catch (error) {
         console.error('Error fetching image list:', error);
+      } finally {
+        setLoading(false); // Set loading to false once images are fetched
       }
     };
 
+    const updateCurrentTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString());
+    };
+
     fetchImages();
+    updateCurrentTime();
+
+    // Update time every second
+    const intervalId = setInterval(updateCurrentTime, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    if (imageList.length === 0) {
+      // No images yet, return or render a loading state
+      return;
+    }
+
+    const slideshowInterval = setInterval(() => {
+      // Move to the next image
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageList.length);
+    }, 10000); // Change the interval as needed (in milliseconds)
+
+    // Clear the interval on component unmount to avoid memory leaks
+    return () => clearInterval(slideshowInterval);
+  }, [imageList]);
 
   return (
     <div>
-      <h1>Notice Board</h1>
-      <div className="image-grid">
-        {imageList.map((image) => (
-          <div key={image.id} className="image-container">
-            <img src={image.imageData} alt={`Image ${image.id}`} />
-          </div>
-        ))}
+      <div className="header">
+        <img src="logosmvec.png" alt="SMVEC Logo" />
+        <h1>Notice Board</h1>
+        <h4>{currentTime}</h4>
+      </div>
+      <div className="marquee-container">
+        <div className="marquee-content">
+          <span>Your Marquee Content Goes Here. </span>
+          {/* Repeat the content as needed */}
+        </div>
+      </div>
+      <div className='mainContainer'>
+        <div className='noticeContainer'>
+          {loading ? (
+            <div className="loading-spinner"></div>
+          ) : (
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <img
+                src={imageList[currentImageIndex].imageData}
+                alt={`Image ${imageList[currentImageIndex].id}`}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
+            </div>
+          )}
+        </div>
+        <div className='textContainer'>
+          <h2>Today's Plan</h2>
+        </div>
       </div>
     </div>
   );
