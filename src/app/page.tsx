@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch('https://dboard-api.onrender.com/api/getAllNotice');
+        const response = await fetch("https://dboard-api.onrender.com/api/getAllNotice");
         if (response.ok) {
           const data: Notice[] = await response.json();
           setImageList(data);
