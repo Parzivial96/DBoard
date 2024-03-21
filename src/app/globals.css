@@ -21,7 +21,6 @@ body {
 .mainContainer{
   display: flex;
   height: 80vh;
-  justify-content: space-around;
   margin-bottom: 5px;
 }
 
@@ -33,6 +32,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .textContainer{
@@ -41,16 +42,8 @@ body {
   color: #f0f0f0;
   border-radius: 10px;
   padding: 5px;
-  width: 30%;
-}
-
-.textContainer ul{
-  padding-left: 50px;
-  font-size: large;
-}
-
-.textContainer li{
-  margin-bottom: 10px;
+  width: 35%;
+  margin-right: 20px;
 }
 
 .marquee-container {
@@ -91,4 +84,34 @@ body {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+
+.marquee-vertical {
+  width: 100%;
+  overflow: hidden;
+  font-size: large;
+  height: 90%;
+}
+
+.marquee-vertical-content {
+  animation: marquee-vertical 12s linear infinite; /* Adjust the duration as needed */
+  font-size: larger;
+  height: 100%;
+  padding: 10px;
+}
+
+.marquee-vertical-content span{
+  margin-right: 30px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }

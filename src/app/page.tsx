@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-//import Image from "next/image";
-import React, { useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 
 interface Notice {
   id: string;
@@ -139,11 +138,13 @@ export default function Home() {
         <div className='textContainer'>
           <center><h2>Today Plan</h2></center>
           <br/>
-          <ul>
-            {todoList.map((todo) => (
-              <li key={todo.id}>{todo.textData}</li>
-            ))}
-          </ul>
+          <div className="marquee-vertical">
+            <div className="marquee-vertical-content">
+                {todoList.map((todo) => (
+                    <span key={todo.id}>* {todo.textData} *</span>
+                ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
