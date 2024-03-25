@@ -110,7 +110,7 @@ export default function Home() {
         <img src="logosmvec.png" alt="SMVEC Logo" width={400} height={80}/>
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
           <h2>Electrical and Electronics Engineering Department</h2>
-          <h3>Notice Board</h3>
+          <h3>Smart Bulletin</h3>
         </div>
         <h3>{currentTime}</h3>
       </div>
