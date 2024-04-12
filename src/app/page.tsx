@@ -14,6 +14,12 @@ interface Todo {
   expiryDate: string;
 }
 
+interface Event {
+  id: string;
+  textData: string;
+  expiryDate: string;
+}
+
 interface Marquee {
   id: string;
   marqueeData: string;
@@ -23,6 +29,7 @@ interface Marquee {
 export default function Home() {
   const [imageList, setImageList] = useState<Notice[]>([]);
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [eventList, setEventList] = useState<Event[]>([]);
   const [marqueeList, setMarqueeList] = useState<Marquee[]>([]);
   const [currentTime, setCurrentTime] = useState<string>("");
   const [currentDate, setCurrentDate] = useState<string>("");
@@ -78,6 +85,22 @@ export default function Home() {
       }
     };
 
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(
+          "https://dboard-api.onrender.com/api/getAllEvent"
+        );
+        if (response.ok) {
+          const data: Todo[] = await response.json();
+          setEventList(data);
+        } else {
+          console.error("Failed to fetch event list");
+        }
+      } catch (error) {
+        console.error("Error fetching event list:", error);
+      }
+    };
+
     const fetchMarquee = async () => {
       try {
         const response = await fetch(
@@ -106,6 +129,7 @@ export default function Home() {
 
     fetchImages();
     fetchTodos();
+    fetchEvents();
     fetchMarquee();
     updateCurrentTime();
     updateCurrentDate();
@@ -147,6 +171,21 @@ export default function Home() {
         });
       } else {
         console.error("Failed to fetch todo list");
+      }
+
+      const eventResponse = await fetch(
+        "https://dboard-api.onrender.com/api/getAllEvent"
+      );
+      if (todoResponse.ok) {
+        const eventData: Event[] = await eventResponse.json();
+        setEventList(prevEventList => {
+          if (eventData.length > prevEventList.length) {
+            playSound();
+          }
+          return eventData;
+        });
+      } else {
+        console.error("Failed to fetch event list");
       }
 
       const marqueeResponse = await fetch(
@@ -244,9 +283,10 @@ export default function Home() {
             </div>
           )}
         </div>
+        <div className="rightContainer">
         <div className="textContainer">
           <center>
-            <h2>Today Plan</h2>
+            <h2>ANNOUNCEMENTS</h2>
           </center>
           <br />
           <div className="marquee-vertical">
@@ -259,9 +299,24 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="qrContainer">
-            <img src="qrcodebanner.png" alt="SMVEC Logo" />
+        </div>
+        <br/>
+        <div className="textContainer">
+          <center>
+            <h2>EVENTS</h2>
+          </center>
+          <br />
+          <div className="marquee-vertical">
+            <div className="marquee-vertical-content">
+              {eventList.map((event) => (
+                <span key={event.id}>
+                  {String.fromCodePoint(0x26a1)}
+                  {event.textData}
+                </span>
+              ))}
+            </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
