@@ -243,7 +243,7 @@ export default function Home() {
             flexDirection: "column",
           }}
         >
-          <h2>Electrical and Electronics Engineering Department</h2>
+          <h2>Department of Electrical and Electronics Engineering</h2>
           <h3>Smart Bulletin</h3>
         </div>
         <div
