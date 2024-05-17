@@ -211,7 +211,7 @@ export default function Home() {
   useEffect(() => {
     fetchData(); // Fetch data initially
 
-    const intervalId = setInterval(fetchData, 10000); // Fetch data every 10 seconds
+    const intervalId = setInterval(fetchData, 500000); // Fetch data every 5 min
 
     return () => clearInterval(intervalId); // Clear interval on unmount
   }, []);
@@ -225,7 +225,7 @@ export default function Home() {
     const slideshowInterval = setInterval(() => {
       // Move to the next image
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageList.length);
-    }, 10000); // Change the interval as needed (in milliseconds)
+    }, 35000); // Change the interval as needed (in milliseconds)
 
     // Clear the interval on component unmount to avoid memory leaks
     return () => clearInterval(slideshowInterval);
@@ -243,7 +243,8 @@ export default function Home() {
             flexDirection: "column",
           }}
         >
-          <h2>Department of Electrical and Electronics Engineering</h2>
+          <h2>Department of Electrical and</h2>
+          <h2>Electronics Engineering</h2>
           <h3>Smart Bulletin</h3>
         </div>
         <div
@@ -252,6 +253,8 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
+            border: "2px solid black",
+            padding: "5px"
           }}
         >
           <h3>{currentDate}</h3>
@@ -317,6 +320,16 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
+      </div>
+      <div className="marquee-container">
+        <div className="marquee-content">
+  
+            <span>
+              {String.fromCodePoint(0x1f539)} {"Project by Dr. D. Raja, Savitha. M, Anjana Berlin and Kokilavani. S (Batch 2020-24)"}
+              {String.fromCodePoint(0x1f539)}
+            </span>
+          
         </div>
       </div>
     </div>
