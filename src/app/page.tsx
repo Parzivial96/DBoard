@@ -211,7 +211,7 @@ export default function Home() {
   useEffect(() => {
     fetchData(); // Fetch data initially
 
-    const intervalId = setInterval(fetchData, 500000); // Fetch data every 5 min
+    const intervalId = setInterval(fetchData, 1000000); // Fetch data every 10 min
 
     return () => clearInterval(intervalId); // Clear interval on unmount
   }, []);
